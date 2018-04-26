@@ -3,6 +3,7 @@ package mirrg.beryllium.lang;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.Optional;
 import java.util.Spliterator;
 import java.util.Spliterators;
 import java.util.function.Consumer;
@@ -133,6 +134,13 @@ public interface LambdaUtil
 		return stream
 			.filter(clazz::isInstance)
 			.map(clazz::cast);
+	}
+
+	public static <T> Stream<T> filterPresent(Stream<Optional<T>> soT)
+	{
+		return soT
+			.filter(oT -> oT.isPresent())
+			.map(oT -> oT.get());
 	}
 
 }
