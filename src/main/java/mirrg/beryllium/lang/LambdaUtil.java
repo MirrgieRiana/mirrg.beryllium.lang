@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
-public class LambdaUtil
+public interface LambdaUtil
 {
 
 	public static <T> T process(T t, Consumer<T> consumer)

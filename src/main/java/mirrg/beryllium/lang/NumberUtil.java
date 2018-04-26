@@ -4,7 +4,7 @@ import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
 
-public class NumberUtil
+public interface NumberUtil
 {
 
 	public static OptionalInt parseInt(String s)
