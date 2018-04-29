@@ -106,4 +106,24 @@ public interface NumberUtil
 		return value;
 	}
 
+	//
+
+	/**
+	 * valueがminからmaxの範囲に収まるように、適切に余りを求めます。
+	 * value = -1の場合maxを返し、以下流れに沿って適切な値を返します。
+	 * minがmaxよりも大きな値だった場合、minとmaxを逆に解釈します。
+	 */
+	public static int torus(int value, int min, int max)
+	{
+		if (min > max) return torus(value, max, min);
+
+		int n = max - min + 1;
+
+		if (value < 0) {
+			return (n - 1) - (-value - 1) % n + min;
+		} else {
+			return value % n + min;
+		}
+	}
+
 }
