@@ -109,6 +109,68 @@ public interface NumberUtil
 	//
 
 	/**
+	 * valueがminかmaxと等しい場合に1、minからmaxの範囲内の場合に2、それ以外の場合に0を返します。
+	 */
+	public static int contains(int value, int min, int max)
+	{
+		if (min > max) return contains(value, max, min);
+
+		if (value == min) return 1;
+		if (value == max) return 1;
+
+		if (value > min && value < max) return 1;
+
+		return 0;
+	}
+
+	/**
+	 * valueがminかmaxと等しい場合に1、minからmaxの範囲内の場合に2、それ以外の場合に0を返します。
+	 */
+	public static int contains(long value, long min, long max)
+	{
+		if (min > max) return contains(value, max, min);
+
+		if (value == min) return 1;
+		if (value == max) return 1;
+
+		if (value > min && value < max) return 1;
+
+		return 0;
+	}
+
+	/**
+	 * valueがminかmaxと等しい場合に1、minからmaxの範囲内の場合に2、それ以外の場合に0を返します。
+	 */
+	public static int contains(float value, float min, float max)
+	{
+		if (min > max) return contains(value, max, min);
+
+		if (value == min) return 1;
+		if (value == max) return 1;
+
+		if (value > min && value < max) return 1;
+
+		return 0;
+	}
+
+	/**
+	 * valueがminかmaxと等しい場合に1、minからmaxの範囲内の場合に2、それ以外の場合に0を返します。
+	 */
+	public static int contains(double value, double min, double max)
+	{
+		if (min > max) return contains(value, max, min);
+
+		if (value == min) return 1;
+		if (value == max) return 1;
+
+		if (value > min && value < max) return 1;
+
+		return 0;
+	}
+
+	//
+
+	/**
 	 * valueがminからmaxの範囲に収まるように、適切に余りを求めます。
 	 * value = -1の場合maxを返し、以下流れに沿って適切な値を返します。
 	 * minがmaxよりも大きな値だった場合、minとmaxを逆に解釈します。
