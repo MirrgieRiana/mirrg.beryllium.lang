@@ -1,8 +1,11 @@
 package mirrg.beryllium.lang;
 
+import java.util.Comparator;
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
+import java.util.function.ToDoubleFunction;
+import java.util.function.ToIntFunction;
 
 public interface NumberUtil
 {
@@ -186,6 +189,68 @@ public interface NumberUtil
 		} else {
 			return value % n + min;
 		}
+	}
+
+	//
+
+	/**
+	 * @see Comparator
+	 */
+	public static int compare(int a, int b)
+	{
+		if (a < b) return -1;
+		if (a > b) return 1;
+		return 0;
+	}
+
+	/**
+	 * @see Comparator
+	 */
+	public static int compare(long a, long b)
+	{
+		if (a < b) return -1;
+		if (a > b) return 1;
+		return 0;
+	}
+
+	/**
+	 * @see Comparator
+	 */
+	public static int compare(float a, float b)
+	{
+		if (a < b) return -1;
+		if (a > b) return 1;
+		return 0;
+	}
+
+	/**
+	 * @see Comparator
+	 */
+	public static int compare(double a, double b)
+	{
+		if (a < b) return -1;
+		if (a > b) return 1;
+		return 0;
+	}
+
+	public static <T> Comparator<T> createComparator(ToIntFunction<T> function)
+	{
+		return (a, b) -> compare(function.applyAsInt(a), function.applyAsInt(b));
+	}
+
+	public static <T> Comparator<T> createComparator(ToDoubleFunction<T> function)
+	{
+		return (a, b) -> compare(function.applyAsDouble(a), function.applyAsDouble(b));
+	}
+
+	public static <T> Comparator<T> createComparatorNegate(ToIntFunction<T> function)
+	{
+		return (a, b) -> -compare(function.applyAsInt(a), function.applyAsInt(b));
+	}
+
+	public static <T> Comparator<T> createComparatorNegate(ToDoubleFunction<T> function)
+	{
+		return (a, b) -> -compare(function.applyAsDouble(a), function.applyAsDouble(b));
 	}
 
 }
