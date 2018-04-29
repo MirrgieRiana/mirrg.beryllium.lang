@@ -1,10 +1,10 @@
-package backup;
+package mirrg.beryllium.lang;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 
-public class HFile
+public interface FileUtil
 {
 
 	public static FileOutputStream getOutputStreamAndMkdirs(File file) throws FileNotFoundException
