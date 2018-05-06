@@ -82,6 +82,36 @@ public interface ISuppliterator<T>
 		return toCollection(ArrayList::new);
 	}
 
+	public static <T> ISuppliterator<T> flatten(ISuppliterator<ISuppliterator<T>> suppliterator)
+	{
+		return new SuppliteratorBase<T>() {
+
+			private ISuppliterator<T> current = null;
+
+			@Override
+			protected Optional<T> nextImpl()
+			{
+				while (true) {
+					if (current == null) {
+						Optional<ISuppliterator<T>> oCurrent = suppliterator.next();
+						if (oCurrent.isPresent()) {
+							current = oCurrent.get();
+						} else {
+							return Optional.empty();
+						}
+					}
+					Optional<T> oNext = current.next();
+					if (oNext.isPresent()) {
+						return oNext;
+					} else {
+						current = null;
+					}
+				}
+			}
+
+		};
+	}
+
 	public static <I extends O, O> ISuppliterator<O> cast(ISuppliterator<I> suppliterator)
 	{
 		return suppliterator.map(i -> i);
