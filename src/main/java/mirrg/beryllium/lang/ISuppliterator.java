@@ -58,6 +58,12 @@ public interface ISuppliterator<T>
 		};
 	}
 
+
+	public default <O> ISuppliterator<O> apply(Function<? super ISuppliterator<? super T>, ? extends ISuppliterator<O>> function)
+	{
+		return function.apply(this);
+	}
+
 	public default T[] toArray(IntFunction<T[]> sArray)
 	{
 		ArrayList<T> list = toCollection();
@@ -74,6 +80,11 @@ public interface ISuppliterator<T>
 	public default ArrayList<T> toCollection()
 	{
 		return toCollection(ArrayList::new);
+	}
+
+	public static <I extends O, O> ISuppliterator<O> cast(ISuppliterator<I> suppliterator)
+	{
+		return suppliterator.map(i -> i);
 	}
 
 	//
@@ -161,6 +172,12 @@ public interface ISuppliterator<T>
 				return iterator.hasNext() ? Optional.of(iterator.next()) : Optional.empty();
 			}
 		};
+	}
+
+	@SafeVarargs
+	public static <T> ISuppliterator<T> concat(ISuppliterator<T>... ts)
+	{
+		return flatten(of(ts));
 	}
 
 }
