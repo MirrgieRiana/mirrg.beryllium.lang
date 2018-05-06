@@ -94,7 +94,12 @@ public interface LambdaUtil
 
 	public static <T> Stream<T> toStream(Enumeration<T> enumeration)
 	{
-		return toStream(new Iterator<T>() {
+		return toStream(toIterator(enumeration));
+	}
+
+	public static <T> Iterator<T> toIterator(Enumeration<T> enumeration)
+	{
+		return new Iterator<T>() {
 			@Override
 			public T next()
 			{
@@ -106,7 +111,7 @@ public interface LambdaUtil
 			{
 				return enumeration.hasMoreElements();
 			}
-		});
+		};
 	}
 
 	public static <T> Stream<T> toStream(Iterator<T> iterator)
