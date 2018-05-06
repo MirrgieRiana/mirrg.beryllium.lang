@@ -157,6 +157,16 @@ public interface LambdaUtil
 		};
 	}
 
+	public static <T> Enumeration<T> toEnumeration(ISuppliterator<T> suppliterator)
+	{
+		return toEnumeration(toIterator(suppliterator));
+	}
+
+	public static <T> Enumeration<T> toEnumeration(Iterable<T> iterable)
+	{
+		return toEnumeration(iterable.iterator());
+	}
+
 	public static <T> Enumeration<T> toEnumeration(Iterator<T> iterator)
 	{
 		return new Enumeration<T>() {
