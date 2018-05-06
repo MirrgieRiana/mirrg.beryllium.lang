@@ -17,13 +17,13 @@ import java.util.stream.StreamSupport;
 public interface LambdaUtil
 {
 
-	public static <T> T process(T t, Consumer<T> consumer)
+	public static <T> T process(T t, Consumer<? super T> consumer)
 	{
 		consumer.accept(t);
 		return t;
 	}
 
-	public static <T> T get(Supplier<T> supplier)
+	public static <T> T get(Supplier<? extends T> supplier)
 	{
 		return supplier.get();
 	}
@@ -33,7 +33,7 @@ public interface LambdaUtil
 	/**
 	 * 添え字番号付きfor。
 	 */
-	public static <O> void forEach(Stream<O> stream, ObjIntConsumer<O> consumer)
+	public static <T> void forEach(Stream<T> stream, ObjIntConsumer<? super T> consumer)
 	{
 		Integer[] index = new Integer[] {
 			0,
@@ -47,13 +47,13 @@ public interface LambdaUtil
 	/**
 	 * 添え字番号付きmap。
 	 */
-	public static <O1, O2> Stream<O2> map(Stream<O1> stream, Obj1IntToObj2<O1, O2> function)
+	public static <I, O> Stream<O> map(Stream<I> stream, Obj1IntToObj2<? super I, ? extends O> function)
 	{
 		Integer[] index = new Integer[] {
 			0,
 		};
 		return stream.sequential().map(object -> {
-			O2 o2 = function.apply(object, index[0]);
+			O o2 = function.apply(object, index[0]);
 			index[0]++;
 			return o2;
 		});
@@ -70,7 +70,7 @@ public interface LambdaUtil
 	/**
 	 * 添え字番号付きfilter。
 	 */
-	public static <O> Stream<O> filter(Stream<O> stream, ObjIntToBoolean<O> predicate)
+	public static <T> Stream<T> filter(Stream<T> stream, ObjIntToBoolean<? super T> predicate)
 	{
 		Integer[] index = new Integer[] {
 			0,
