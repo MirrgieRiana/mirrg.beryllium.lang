@@ -92,26 +92,9 @@ public interface LambdaUtil
 
 	//
 
-	public static <T> Stream<T> toStream(Enumeration<T> enumeration)
+	public static <T> Stream<T> toStream(ISuppliterator<T> suppliterator)
 	{
-		return toStream(toIterator(enumeration));
-	}
-
-	public static <T> Iterator<T> toIterator(Enumeration<T> enumeration)
-	{
-		return new Iterator<T>() {
-			@Override
-			public T next()
-			{
-				return enumeration.nextElement();
-			}
-
-			@Override
-			public boolean hasNext()
-			{
-				return enumeration.hasMoreElements();
-			}
-		};
+		return toStream(toIterator(suppliterator));
 	}
 
 	public static <T> Stream<T> toStream(Iterator<T> iterator)
@@ -127,9 +110,9 @@ public interface LambdaUtil
 		return toStream(iterable.iterator());
 	}
 
-	public static <T> Stream<T> toStream(ISuppliterator<T> suppliterator)
+	public static <T> Stream<T> toStream(Enumeration<T> enumeration)
 	{
-		return toStream(toIterator(suppliterator));
+		return toStream(toIterator(enumeration));
 	}
 
 	public static <T> Iterator<T> toIterator(ISuppliterator<T> suppliterator)
@@ -154,6 +137,23 @@ public interface LambdaUtil
 				return next.isPresent();
 			}
 
+		};
+	}
+
+	public static <T> Iterator<T> toIterator(Enumeration<T> enumeration)
+	{
+		return new Iterator<T>() {
+			@Override
+			public T next()
+			{
+				return enumeration.nextElement();
+			}
+
+			@Override
+			public boolean hasNext()
+			{
+				return enumeration.hasMoreElements();
+			}
 		};
 	}
 
