@@ -92,11 +92,6 @@ public interface LambdaUtil
 
 	//
 
-	public static <T> Stream<T> toStream(ISuppliterator<T> suppliterator)
-	{
-		return toStream(toIterator(suppliterator));
-	}
-
 	public static <T> Stream<T> toStream(Iterator<T> iterator)
 	{
 		return StreamSupport.stream(
@@ -105,70 +100,9 @@ public interface LambdaUtil
 				Spliterator.ORDERED), false);
 	}
 
-	public static <T> Stream<T> toStream(Iterable<T> iterable)
-	{
-		return toStream(iterable.iterator());
-	}
-
 	public static <T> Stream<T> toStream(Enumeration<T> enumeration)
 	{
 		return toStream(toIterator(enumeration));
-	}
-
-	public static <T> ISuppliterator<T> toSuppliterator(Iterator<T> iterator)
-	{
-		return new ISuppliterator<T>() {
-
-			private boolean ended = false;
-
-			@Override
-			public Optional<T> next()
-			{
-				if (ended) return Optional.empty();
-				if (iterator.hasNext()) {
-					return Optional.of(iterator.next());
-				} else {
-					ended = true;
-					return Optional.empty();
-				}
-			}
-
-		};
-	}
-
-	public static <T> ISuppliterator<T> toSuppliterator(Iterable<T> iterable)
-	{
-		return toSuppliterator(iterable.iterator());
-	}
-
-	public static <T> ISuppliterator<T> toSuppliterator(Enumeration<T> enumeration)
-	{
-		return toSuppliterator(toIterator(enumeration));
-	}
-
-	public static <T> Iterator<T> toIterator(ISuppliterator<T> suppliterator)
-	{
-		return new Iterator<T>() {
-
-			private Optional<T> next = null;
-
-			@Override
-			public T next()
-			{
-				if (next == null) next = suppliterator.next();
-				T t = next.get();
-				next = null;
-				return t;
-			}
-
-			@Override
-			public boolean hasNext()
-			{
-				if (next == null) next = suppliterator.next();
-				return next.isPresent();
-			}
-
-		};
 	}
 
 	public static <T> Iterator<T> toIterator(Enumeration<T> enumeration)
@@ -186,16 +120,6 @@ public interface LambdaUtil
 				return enumeration.hasMoreElements();
 			}
 		};
-	}
-
-	public static <T> Enumeration<T> toEnumeration(ISuppliterator<T> suppliterator)
-	{
-		return toEnumeration(toIterator(suppliterator));
-	}
-
-	public static <T> Enumeration<T> toEnumeration(Iterable<T> iterable)
-	{
-		return toEnumeration(iterable.iterator());
 	}
 
 	public static <T> Enumeration<T> toEnumeration(Iterator<T> iterator)
