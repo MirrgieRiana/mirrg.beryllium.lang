@@ -3,6 +3,9 @@ package mirrg.beryllium.lang;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Optional;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 /**
@@ -16,6 +19,42 @@ public interface ISuppliterator<T>
 	 * 		列挙がリストの末端に達して要素が存在しない場合、empty。
 	 */
 	public Optional<T> next();
+
+	//
+
+	public default void forEach(Consumer<? super T> consumer)
+	{
+		while (true) {
+			Optional<T> next = next();
+			if (next.isPresent()) {
+				consumer.accept(next.get());
+			} else {
+				break;
+			}
+		}
+	}
+
+	public default <O> ISuppliterator<O> map(Function<? super T, ? extends O> mapper)
+	{
+		return () -> next().map(mapper);
+	}
+
+	public default ISuppliterator<T> filter(Predicate<? super T> predicate)
+	{
+		return new SuppliteratorBase<T>() {
+			@Override
+			protected Optional<T> nextImpl()
+			{
+				while (true) {
+					Optional<T> next = next();
+					if (!next.isPresent()) return Optional.empty();
+					if (predicate.test(next.get())) return next;
+				}
+			}
+		};
+	}
+
+	//
 
 	public default Stream<T> stream()
 	{
