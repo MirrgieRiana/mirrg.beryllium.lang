@@ -50,7 +50,7 @@ public interface ISuppliterator<T>
 			protected Optional<T> nextImpl()
 			{
 				while (true) {
-					Optional<T> next = next();
+					Optional<T> next = ISuppliterator.this.next();
 					if (!next.isPresent()) return Optional.empty();
 					if (predicate.test(next.get())) return next;
 				}
