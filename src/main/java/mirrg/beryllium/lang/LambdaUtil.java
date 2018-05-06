@@ -157,6 +157,23 @@ public interface LambdaUtil
 		};
 	}
 
+	public static <T> Enumeration<T> toEnumeration(Iterator<T> iterator)
+	{
+		return new Enumeration<T>() {
+			@Override
+			public T nextElement()
+			{
+				return iterator.next();
+			}
+
+			@Override
+			public boolean hasMoreElements()
+			{
+				return iterator.hasNext();
+			}
+		};
+	}
+
 	//
 
 	public static IntStream rangeReverse(int min, int max)
