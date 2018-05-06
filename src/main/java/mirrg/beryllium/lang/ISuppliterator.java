@@ -59,22 +59,12 @@ public interface ISuppliterator<T>
 
 	public static <T> ISuppliterator<T> of(Iterator<T> iterator)
 	{
-		return new ISuppliterator<T>() {
-
-			private boolean ended = false;
-
+		return new SuppliteratorBase<T>() {
 			@Override
-			public Optional<T> next()
+			protected Optional<T> nextImpl()
 			{
-				if (ended) return Optional.empty();
-				if (iterator.hasNext()) {
-					return Optional.of(iterator.next());
-				} else {
-					ended = true;
-					return Optional.empty();
-				}
+				return iterator.hasNext() ? Optional.of(iterator.next()) : Optional.empty();
 			}
-
 		};
 	}
 
