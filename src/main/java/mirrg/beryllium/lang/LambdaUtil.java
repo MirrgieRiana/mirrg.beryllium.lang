@@ -122,6 +122,11 @@ public interface LambdaUtil
 				Spliterator.ORDERED), false);
 	}
 
+	public static <T> Stream<T> toStream(Iterable<T> iterable)
+	{
+		return toStream(iterable.iterator());
+	}
+
 	public static IntStream rangeReverse(int min, int max)
 	{
 		return IntStream.range(min, max)
