@@ -58,6 +58,11 @@ public interface ISuppliterator<T>
 		};
 	}
 
+	public default <O> ISuppliterator<O> flatMap(Function<? super T, ? extends ISuppliterator<? extends O>> mapper)
+	{
+		ISuppliterator<ISuppliterator<? extends O>> m = cast(map(mapper));
+		return flatten(m.map(s -> cast(s)));
+	}
 
 	public default <O> ISuppliterator<O> apply(Function<? super ISuppliterator<? super T>, ? extends ISuppliterator<O>> function)
 	{
