@@ -112,9 +112,10 @@ public interface ISuppliterator<T>
 		};
 	}
 
+	@SuppressWarnings("unchecked")
 	public static <I extends O, O> ISuppliterator<O> cast(ISuppliterator<I> suppliterator)
 	{
-		return suppliterator.map(i -> i);
+		return (ISuppliterator<O>) suppliterator;
 	}
 
 	//
