@@ -64,7 +64,7 @@ public interface ISuppliterator<T>
 		return flatten(m.map(s -> cast(s)));
 	}
 
-	public default <O> ISuppliterator<O> apply(Function<? super ISuppliterator<? super T>, ? extends ISuppliterator<O>> function)
+	public default <O> ISuppliterator<O> apply(Function<? super ISuppliterator<T>, ? extends ISuppliterator<O>> function)
 	{
 		return function.apply(this);
 	}
