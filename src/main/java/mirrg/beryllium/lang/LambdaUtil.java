@@ -94,21 +94,26 @@ public interface LambdaUtil
 
 	public static <T> Stream<T> toStream(Enumeration<T> enumeration)
 	{
+		return toStream(new Iterator<T>() {
+			@Override
+			public T next()
+			{
+				return enumeration.nextElement();
+			}
+
+			@Override
+			public boolean hasNext()
+			{
+				return enumeration.hasMoreElements();
+			}
+		});
+	}
+
+	public static <T> Stream<T> toStream(Iterator<T> iterator)
+	{
 		return StreamSupport.stream(
 			Spliterators.spliteratorUnknownSize(
-				new Iterator<T>() {
-					@Override
-					public T next()
-					{
-						return enumeration.nextElement();
-					}
-
-					@Override
-					public boolean hasNext()
-					{
-						return enumeration.hasMoreElements();
-					}
-				},
+				iterator,
 				Spliterator.ORDERED), false);
 	}
 
