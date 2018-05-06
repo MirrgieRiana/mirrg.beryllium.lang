@@ -157,6 +157,8 @@ public interface LambdaUtil
 		};
 	}
 
+	//
+
 	public static IntStream rangeReverse(int min, int max)
 	{
 		return IntStream.range(min, max)
