@@ -52,11 +52,19 @@ public interface ISuppliterator<T>
 		return LambdaUtil.toEnumeration(iterator());
 	}
 
+	/**
+	 * @param enumeration
+	 *            nullを含まないTのEnumeration
+	 */
 	public static <T> ISuppliterator<T> of(Enumeration<T> enumeration)
 	{
 		return of(LambdaUtil.toIterator(enumeration));
 	}
 
+	/**
+	 * @param iterator
+	 *            nullを含まないTのIterator
+	 */
 	public static <T> ISuppliterator<T> of(Iterator<T> iterator)
 	{
 		return new SuppliteratorBase<T>() {
