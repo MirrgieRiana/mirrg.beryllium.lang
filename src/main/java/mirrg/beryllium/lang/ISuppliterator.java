@@ -53,6 +53,32 @@ public interface ISuppliterator<T>
 	}
 
 	/**
+	 * @param ts
+	 *            nullを含まないTの配列
+	 */
+	@SafeVarargs
+	public static <T> ISuppliterator<T> of(T... ts)
+	{
+		return new SuppliteratorBase<T>() {
+
+			private int index = 0;
+
+			@Override
+			protected Optional<T> nextImpl()
+			{
+				if (index < ts.length) {
+					T next = ts[index];
+					index++;
+					return Optional.of(next);
+				} else {
+					return Optional.empty();
+				}
+			}
+
+		};
+	}
+
+	/**
 	 * @param enumeration
 	 *            nullを含まないTのEnumeration
 	 */
