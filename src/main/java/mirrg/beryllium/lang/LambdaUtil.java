@@ -127,6 +127,36 @@ public interface LambdaUtil
 		return toStream(iterable.iterator());
 	}
 
+	public static <T> Stream<T> toStream(ISuppliterator<T> suppliterator)
+	{
+		return toStream(toIterator(suppliterator));
+	}
+
+	public static <T> Iterator<T> toIterator(ISuppliterator<T> suppliterator)
+	{
+		return new Iterator<T>() {
+
+			private Optional<T> next = null;
+
+			@Override
+			public T next()
+			{
+				if (next == null) next = suppliterator.next();
+				T t = next.get();
+				next = null;
+				return t;
+			}
+
+			@Override
+			public boolean hasNext()
+			{
+				if (next == null) next = suppliterator.next();
+				return next.isPresent();
+			}
+
+		};
+	}
+
 	public static IntStream rangeReverse(int min, int max)
 	{
 		return IntStream.range(min, max)
