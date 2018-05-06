@@ -115,6 +115,37 @@ public interface LambdaUtil
 		return toStream(toIterator(enumeration));
 	}
 
+	public static <T> ISuppliterator<T> toSuppliterator(Iterator<T> iterator)
+	{
+		return new ISuppliterator<T>() {
+
+			private boolean ended = false;
+
+			@Override
+			public Optional<T> next()
+			{
+				if (ended) return Optional.empty();
+				if (iterator.hasNext()) {
+					return Optional.of(iterator.next());
+				} else {
+					ended = true;
+					return Optional.empty();
+				}
+			}
+
+		};
+	}
+
+	public static <T> ISuppliterator<T> toSuppliterator(Iterable<T> iterable)
+	{
+		return toSuppliterator(iterable.iterator());
+	}
+
+	public static <T> ISuppliterator<T> toSuppliterator(Enumeration<T> enumeration)
+	{
+		return toSuppliterator(toIterator(enumeration));
+	}
+
 	public static <T> Iterator<T> toIterator(ISuppliterator<T> suppliterator)
 	{
 		return new Iterator<T>() {
