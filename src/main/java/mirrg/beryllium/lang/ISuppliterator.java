@@ -1,11 +1,15 @@
 package mirrg.beryllium.lang;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Optional;
 import java.util.function.Consumer;
 import java.util.function.Function;
+import java.util.function.IntFunction;
 import java.util.function.Predicate;
+import java.util.function.Supplier;
 import java.util.stream.Stream;
 
 /**
@@ -52,6 +56,24 @@ public interface ISuppliterator<T>
 				}
 			}
 		};
+	}
+
+	public default T[] toArray(IntFunction<T[]> sArray)
+	{
+		ArrayList<T> list = toCollection();
+		return list.toArray(sArray.apply(list.size()));
+	}
+
+	public default <C extends Collection<? super T>> C toCollection(Supplier<? extends C> sCollection)
+	{
+		C collection = sCollection.get();
+		forEach(collection::add);
+		return collection;
+	}
+
+	public default ArrayList<T> toCollection()
+	{
+		return toCollection(ArrayList::new);
 	}
 
 	//
