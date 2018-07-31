@@ -40,7 +40,7 @@ public class StringUtil
 	}
 
 	/**
-	 * UTF-8によって {@link #encode(String, Charset)} を呼び出します。
+	 * UTF-8によって {@link #encode(CharSequence, Charset)} を呼び出します。
 	 */
 	public static CharSequence encode(CharSequence string)
 	{
