@@ -8,6 +8,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import mirrg.beryllium.lang.StringUtil;
+
 public class HString
 {
 
@@ -51,8 +53,8 @@ public class HString
 
 						int length = Math.max(la, lb);
 
-						sa = rept('0', length - la) + sa;
-						sb = rept('0', length - lb) + sb;
+						sa = StringUtil.rept('0', length - la) + sa;
+						sb = StringUtil.rept('0', length - lb) + sb;
 					}
 
 					int compare = comparator.compare(sa, sb);
@@ -63,24 +65,6 @@ public class HString
 			}
 		}
 
-	}
-
-	public static String rept(char ch, int t)
-	{
-		StringBuffer sb = new StringBuffer(t);
-		for (int i = 0; i < t; i++) {
-			sb.append(ch);
-		}
-		return sb.toString();
-	}
-
-	public static String rept(String string, int t)
-	{
-		StringBuffer sb = new StringBuffer(string.length() + t);
-		for (int i = 0; i < t; i++) {
-			sb.append(string);
-		}
-		return sb.toString();
 	}
 
 	public static class SplitStringStream
@@ -301,13 +285,13 @@ public class HString
 	public static String fillLeft(char ch, String string, int length)
 	{
 		if (string.length() >= length) return string;
-		return rept(ch, length - string.length()) + string;
+		return StringUtil.rept(ch, length - string.length()) + string;
 	}
 
 	public static String fillRight(char ch, String string, int length)
 	{
 		if (string.length() >= length) return string;
-		return string + rept(ch, length - string.length());
+		return string + StringUtil.rept(ch, length - string.length());
 	}
 
 }

@@ -142,4 +142,24 @@ public class StringUtil
 		return decode(string, StandardCharsets.UTF_8);
 	}
 
+	//
+
+	public static String rept(char ch, int t)
+	{
+		StringBuffer sb = new StringBuffer(t);
+		for (int i = 0; i < t; i++) {
+			sb.append(ch);
+		}
+		return sb.toString();
+	}
+
+	public static String rept(String string, int t)
+	{
+		StringBuffer sb = new StringBuffer(string.length() * t);
+		for (int i = 0; i < t; i++) {
+			sb.append(string);
+		}
+		return sb.toString();
+	}
+
 }

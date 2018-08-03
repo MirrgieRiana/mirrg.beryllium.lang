@@ -45,4 +45,14 @@ public class TestStringUtil
 
 	}
 
+	@Test
+	public void test_rept()
+	{
+		assertEquals("", rept("あいう", 0));
+		assertEquals("あいう", rept("あいう", 1));
+		assertEquals("あいうあいう", rept("あいう", 2));
+		assertEquals("あいうあいうあいう", rept("あいう", 3));
+		assertEquals("aiuaiuaiu", rept("aiu", 3));
+	}
+
 }
