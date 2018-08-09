@@ -282,16 +282,4 @@ public class HString
 		}
 	}
 
-	public static String fillLeft(char ch, String string, int length)
-	{
-		if (string.length() >= length) return string;
-		return StringUtil.rept(ch, length - string.length()) + string;
-	}
-
-	public static String fillRight(char ch, String string, int length)
-	{
-		if (string.length() >= length) return string;
-		return string + StringUtil.rept(ch, length - string.length());
-	}
-
 }

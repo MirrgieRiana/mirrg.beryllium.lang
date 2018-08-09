@@ -162,4 +162,28 @@ public class StringUtil
 		return sb.toString();
 	}
 
+	//
+
+	public static String fillLeft(char ch, String string, int length)
+	{
+		if (string.length() >= length) return string;
+		return rept(ch, length - string.length()) + string;
+	}
+
+	public static String fillLeft(String string, int length)
+	{
+		return fillLeft(' ', string, length);
+	}
+
+	public static String fillRight(char ch, String string, int length)
+	{
+		if (string.length() >= length) return string;
+		return string + rept(ch, length - string.length());
+	}
+
+	public static String fillRight(String string, int length)
+	{
+		return fillRight(' ', string, length);
+	}
+
 }
