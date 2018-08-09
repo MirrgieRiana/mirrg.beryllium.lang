@@ -8,7 +8,7 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import mirrg.beryllium.lang.StringUtil;
+import mirrg.beryllium.lang.UString;
 
 public class HString
 {
@@ -53,8 +53,8 @@ public class HString
 
 						int length = Math.max(la, lb);
 
-						sa = StringUtil.rept('0', length - la) + sa;
-						sb = StringUtil.rept('0', length - lb) + sb;
+						sa = UString.rept('0', length - la) + sa;
+						sb = UString.rept('0', length - lb) + sb;
 					}
 
 					int compare = comparator.compare(sa, sb);

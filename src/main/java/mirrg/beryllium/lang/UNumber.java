@@ -7,7 +7,7 @@ import java.util.OptionalLong;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
 
-public interface NumberUtil
+public class UNumber
 {
 
 	public static OptionalInt parseInt(String s)
