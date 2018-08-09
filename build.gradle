@@ -13,6 +13,10 @@ tasks.withType(GroovyCompile)*.groovyOptions*.encoding = 'UTF-8'
 
 def mavenRootDir = '../' * (project.group.count('.') + 2)
 
+// 依存関係
+
+// 成果物
+
 jar {
 	manifest {
 		attributes 'Implementation-Title': 'Gradle Quickstart'
@@ -66,6 +70,48 @@ uploadArchives {
 	}
 }
 
+//////////////////////////// その他
+
 task wrapper(type: Wrapper) {
     gradleVersion = '4.9'
 }
+
+/*
+// Java 9 MJigsaw対応
+// GradleがJigsawに対応するまで保留
+
+compileJava {
+    doFirst {
+        options.compilerArgs = [
+            "--module-path", classpath.asPath
+        ]
+        //classpath = files()
+    }
+}
+
+compileTestJava {
+    doFirst {
+        options.compilerArgs = [
+            "--module-path", classpath.asPath,
+            "--add-modules", junitModuleName,
+            "--patch-module", "$moduleName=" + files(sourceSets.test.java.srcDirs).asPath,
+            "--add-reads", "$moduleName=$junitModuleName"
+        ]
+        //classpath = files()
+    }
+}
+
+apply plugin: 'eclipse'
+
+eclipse {
+    classpath {
+        file {
+            whenMerged {
+                entries.findAll {
+                    it.kind == 'src' || it.kind == 'lib'
+                }.each { it.entryAttributes['module'] = 'true' }
+            }
+        }
+    }
+}
+*/
