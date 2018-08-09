@@ -1,4 +1,4 @@
-package backup;
+package mirrg.beryllium.lang.backup;
 
 import static org.junit.Assert.*;
 

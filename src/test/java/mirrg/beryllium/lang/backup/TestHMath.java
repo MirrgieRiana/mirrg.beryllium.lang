@@ -1,6 +1,6 @@
-package backup;
+package mirrg.beryllium.lang.backup;
 
-import static backup.HMath.*;
+import static mirrg.beryllium.lang.backup.HMath.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;

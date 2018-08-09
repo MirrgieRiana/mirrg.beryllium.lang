@@ -1,11 +1,11 @@
-package backup;
+package mirrg.beryllium.lang.backup;
 
-import static backup.HString.*;
+import static mirrg.beryllium.lang.backup.HString.*;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import backup.HString.LineProvider;
+import mirrg.beryllium.lang.backup.HString.LineProvider;
 
 public class TestHString
 {

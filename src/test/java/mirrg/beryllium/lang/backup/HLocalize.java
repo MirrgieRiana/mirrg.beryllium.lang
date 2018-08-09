@@ -1,4 +1,4 @@
-package backup;
+package mirrg.beryllium.lang.backup;
 
 import java.io.BufferedReader;
 import java.io.File;
