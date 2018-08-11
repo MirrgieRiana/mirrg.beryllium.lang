@@ -1,12 +1,12 @@
 package mirrg.beryllium.lang.backup;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.OptionalDouble;
 import java.util.OptionalInt;
 import java.util.OptionalLong;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import mirrg.beryllium.lang.UNumber;
 

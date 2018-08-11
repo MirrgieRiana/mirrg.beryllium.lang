@@ -1,18 +1,29 @@
 package mirrg.beryllium.lang;
 
 import static mirrg.beryllium.lang.UString.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.nio.charset.Charset;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TestUString
 {
 
-	@Test
-	public void test_encode()
+	public static void main(String[] args)
 	{
+		System.out.println(4);
+	}
+
+	@Test
+	public void test_encode2()
+	{
+		fail();
+	}
+
+		@Test
+		public void test_encode()
+		{
 		assertEquals("abc%2Fdef", encode("abc/def"));
 		assertEquals("abc%E3%81%82def", encode("abcあdef"));
 		assertEquals("abc%25def", encode("abc%def"));

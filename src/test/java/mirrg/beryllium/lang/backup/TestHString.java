@@ -1,9 +1,9 @@
 package mirrg.beryllium.lang.backup;
 
 import static mirrg.beryllium.lang.backup.HString.*;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import mirrg.beryllium.lang.backup.HString.LineProvider;
 
