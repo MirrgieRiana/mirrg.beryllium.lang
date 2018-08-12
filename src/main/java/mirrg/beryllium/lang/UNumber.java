@@ -194,8 +194,11 @@ public class UNumber
 	//
 
 	/**
+	 * @deprecated
+	 * 			このメソッドの代わりに {@link Integer#compare(int, int)} を使ってください。
 	 * @see Comparator
 	 */
+	@Deprecated // TODO delete
 	public static int compare(int a, int b)
 	{
 		if (a < b) return -1;
@@ -204,8 +207,11 @@ public class UNumber
 	}
 
 	/**
+	 * @deprecated
+	 * 			このメソッドの代わりに {@link Long#compare(long, long)} を使ってください。
 	 * @see Comparator
 	 */
+	@Deprecated // TODO delete
 	public static int compare(long a, long b)
 	{
 		if (a < b) return -1;
@@ -214,8 +220,11 @@ public class UNumber
 	}
 
 	/**
+	 * @deprecated
+	 * 			このメソッドの代わりに {@link Float#compare(float, float)} を使ってください。
 	 * @see Comparator
 	 */
+	@Deprecated // TODO delete
 	public static int compare(float a, float b)
 	{
 		if (a < b) return -1;
@@ -224,8 +233,11 @@ public class UNumber
 	}
 
 	/**
+	 * @deprecated
+	 * 			このメソッドの代わりに {@link Double#compare(double, double)} を使ってください。
 	 * @see Comparator
 	 */
+	@Deprecated // TODO delete
 	public static int compare(double a, double b)
 	{
 		if (a < b) return -1;
