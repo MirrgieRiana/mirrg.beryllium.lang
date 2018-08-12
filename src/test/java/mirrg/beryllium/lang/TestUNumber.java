@@ -1,4 +1,4 @@
-package mirrg.beryllium.lang.backup;
+package mirrg.beryllium.lang;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import mirrg.beryllium.lang.UNumber;
 
-public class TestHOptional
+public class TestUNumber
 {
 
 	@Test
