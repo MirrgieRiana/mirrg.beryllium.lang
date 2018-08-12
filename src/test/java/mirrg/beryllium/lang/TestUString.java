@@ -7,30 +7,23 @@ import java.nio.charset.Charset;
 
 import org.junit.jupiter.api.Test;
 
+import mirrg.beryllium.lang.string.PercentEncoding;
+
 public class TestUString
 {
 
-	public static void main(String[] args)
-	{
-		System.out.println(4);
-	}
-
 	@Test
-	public void test_encode2()
+	public void test_encode()
 	{
-		fail();
-	}
-
-		@Test
-		public void test_encode()
-		{
 		assertEquals("abc%2Fdef", encode("abc/def"));
 		assertEquals("abc%E3%81%82def", encode("abcあdef"));
 		assertEquals("abc%25def", encode("abc%def"));
 		assertEquals("%20%21%22%23%24%25%26%27%28%29%2A%2B%2C%2D%2E%2F0123456789%3A%3B%3C%3D%3E%3F%40ABCDEFGHIJKLMNOPQRSTUVWXYZ%5B%5C%5D%5E%5F%60abcdefghijklmnopqrstuvwxyz%7B%7C%7D%7E",
 			encode(" !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~"));
-		assertEquals("%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8D%E3%81%8F%E3%81%91%E3%81%93", encode("あいうえおかきくけこ"));
-		assertEquals("%82%A0%82%A2%82%A4%82%A6%82%A8%82%A9%82%AB%82%AD%82%AF%82%B1", encode("あいうえおかきくけこ", Charset.forName("Shift_JIS")));
+		assertEquals("%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8D%E3%81%8F%E3%81%91%E3%81%93",
+			encode("あいうえおかきくけこ"));
+		assertEquals("%82%A0%82%A2%82%A4%82%A6%82%A8%82%A9%82%AB%82%AD%82%AF%82%B1",
+			PercentEncoding.encode("あいうえおかきくけこ", Charset.forName("Shift_JIS")));
 
 		assertEquals("abc/def", decode("abc%2Fdef"));
 		assertEquals("abcあdef", decode("abc%E3%81%82def"));
@@ -40,7 +33,7 @@ public class TestUString
 		assertEquals("あいうえおかきくけこ",
 			decode("%E3%81%82%E3%81%84%E3%81%86%E3%81%88%E3%81%8A%E3%81%8B%E3%81%8D%E3%81%8F%E3%81%91%E3%81%93"));
 		assertEquals("あいうえおかきくけこ",
-			decode("%82%A0%82%A2%82%A4%82%A6%82%A8%82%A9%82%AB%82%AD%82%AF%82%B1", Charset.forName("Shift_JIS")));
+			PercentEncoding.decode("%82%A0%82%A2%82%A4%82%A6%82%A8%82%A9%82%AB%82%AD%82%AF%82%B1", Charset.forName("Shift_JIS")));
 
 		assertEquals("abcdef5%2", decode("abcdef5%2"));
 		assertEquals("%あああ", decode("%あああ"));
