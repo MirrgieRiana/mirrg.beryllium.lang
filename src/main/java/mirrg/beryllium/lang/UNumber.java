@@ -6,6 +6,7 @@ import java.util.OptionalInt;
 import java.util.OptionalLong;
 import java.util.function.ToDoubleFunction;
 import java.util.function.ToIntFunction;
+import java.util.function.ToLongFunction;
 
 public class UNumber
 {
@@ -193,76 +194,34 @@ public class UNumber
 
 	//
 
-	/**
-	 * @deprecated
-	 * 			このメソッドの代わりに {@link Integer#compare(int, int)} を使ってください。
-	 * @see Comparator
-	 */
-	@Deprecated // TODO delete
-	public static int compare(int a, int b)
-	{
-		if (a < b) return -1;
-		if (a > b) return 1;
-		return 0;
-	}
-
-	/**
-	 * @deprecated
-	 * 			このメソッドの代わりに {@link Long#compare(long, long)} を使ってください。
-	 * @see Comparator
-	 */
-	@Deprecated // TODO delete
-	public static int compare(long a, long b)
-	{
-		if (a < b) return -1;
-		if (a > b) return 1;
-		return 0;
-	}
-
-	/**
-	 * @deprecated
-	 * 			このメソッドの代わりに {@link Float#compare(float, float)} を使ってください。
-	 * @see Comparator
-	 */
-	@Deprecated // TODO delete
-	public static int compare(float a, float b)
-	{
-		if (a < b) return -1;
-		if (a > b) return 1;
-		return 0;
-	}
-
-	/**
-	 * @deprecated
-	 * 			このメソッドの代わりに {@link Double#compare(double, double)} を使ってください。
-	 * @see Comparator
-	 */
-	@Deprecated // TODO delete
-	public static int compare(double a, double b)
-	{
-		if (a < b) return -1;
-		if (a > b) return 1;
-		return 0;
-	}
-
 	public static <T> Comparator<T> createComparator(ToIntFunction<T> function)
 	{
-		return (a, b) -> compare(function.applyAsInt(a), function.applyAsInt(b));
+		return (a, b) -> Integer.compare(function.applyAsInt(a), function.applyAsInt(b));
+	}
+
+	public static <T> Comparator<T> createComparator(ToLongFunction<T> function)
+	{
+		return (a, b) -> Long.compare(function.applyAsLong(a), function.applyAsLong(b));
 	}
 
 	public static <T> Comparator<T> createComparator(ToDoubleFunction<T> function)
 	{
-		return (a, b) -> compare(function.applyAsDouble(a), function.applyAsDouble(b));
+		return (a, b) -> Double.compare(function.applyAsDouble(a), function.applyAsDouble(b));
 	}
 
-	public static <T> Comparator<T> createComparatorNegate(ToIntFunction<T> function)
+	public static <T> Comparator<T> createComparatorReversed(ToIntFunction<T> function)
 	{
-		return (a, b) -> -compare(function.applyAsInt(a), function.applyAsInt(b));
+		return createComparator(function).reversed();
 	}
 
-	public static <T> Comparator<T> createComparatorNegate(ToDoubleFunction<T> function)
+	public static <T> Comparator<T> createComparatorReversed(ToLongFunction<T> function)
 	{
-		return (a, b) -> -compare(function.applyAsDouble(a), function.applyAsDouble(b));
+		return createComparator(function).reversed();
+	}
+
+	public static <T> Comparator<T> createComparatorReversed(ToDoubleFunction<T> function)
+	{
+		return createComparator(function).reversed();
 	}
 
 }
